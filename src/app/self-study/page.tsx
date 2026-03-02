@@ -1,5 +1,7 @@
 import ContentCard from '@/components/Cards/ContentCard'
-
+import PageLayout from '@/components/PageLayout'
+import PageHeader from '@/components/PageHeader'
+import styles from '@/app/page.module.css'
 import { SelfStudyRecord } from '@/types/SelfStudy'
 import { headers } from 'next/headers'
 
@@ -17,11 +19,22 @@ export default async function SelfStudyPage() {
   const baseUrl = `${protocol}://${host}`
   const records = await getSelfStudyData(baseUrl)
 
-  return (
-    <div>
+  const header = (
+    <PageHeader
+      title="Self-study"
+      subtitle={
+        'These curricula and reading lists enable you to dive deeper into AI safety through independent learning.'
+      }
+    />
+  )
+
+  const main = (
+    <div className={styles.cardsGrid}>
       {records.map(({ id, ...cardProps }) => (
         <ContentCard key={id} {...cardProps} />
       ))}
     </div>
   )
+
+  return <PageLayout header={header} main={main} />
 }

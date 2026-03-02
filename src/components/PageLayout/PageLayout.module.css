@@ -1,0 +1,49 @@
+.page {
+  padding-top: 32px;
+  padding-bottom: 48px;
+}
+
+.headerRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.headerContent {
+  flex: 1 1 auto;
+}
+
+.lastUpdated {
+  flex: 0 0 auto;
+}
+
+.hero {
+  margin-bottom: 24px;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 40px;
+  align-items: start;
+}
+
+.main {
+  min-width: 0;
+}
+
+.sidebar {
+  min-width: 0;
+}
+
+@media (max-width: 991px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    order: 2;
+  }
+}
