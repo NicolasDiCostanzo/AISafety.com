@@ -1,3 +1,4 @@
+import { AirtableRecord } from '@/types/Airtable'
 import { NextResponse } from 'next/server'
 
 const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN
@@ -38,10 +39,8 @@ export async function GET() {
 
     const data = await response.json()
 
-    // Transform records to a clean array, extracting logo URL from attachment array
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const records = (data.records || []).map((record: any) => {
-      let logoUrl = undefined
+    const records = (data.records || []).map((record: AirtableRecord) => {
+      let logoUrl: string | undefined
       if (Array.isArray(record.fields.Logo) && record.fields.Logo.length > 0) {
         logoUrl = record.fields.Logo[0].url
       }
@@ -53,7 +52,6 @@ export async function GET() {
         createdBy: record.fields['Created by'],
         url: record.fields.Link,
         logoUrl,
-        status: record.fields.Status,
       }
     })
 

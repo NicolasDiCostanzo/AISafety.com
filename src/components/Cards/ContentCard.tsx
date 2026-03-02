@@ -1,18 +1,6 @@
 import Image from 'next/image'
-import styles from '@/app/page.module.css'
 import componentCardStyles from './ContentCard.module.css'
-
-interface ContentCardProps {
-  title: string
-  description: string
-  category: string
-  createdBy: string
-  url: string
-  logoUrl?: string
-  status?: string
-  showBookmark?: boolean
-  className?: string
-}
+import { ContentCardProps } from '@/types/SelfStudy'
 
 export default function ContentCard({
   title,
@@ -21,19 +9,16 @@ export default function ContentCard({
   createdBy,
   url,
   logoUrl,
-  status,
   showBookmark = true,
-  className = '',
 }: ContentCardProps) {
   return (
     <a
       href={url}
-      className={`${componentCardStyles.card} ${className}`}
+      className={componentCardStyles.card}
       target="_blank"
       rel="noopener noreferrer"
     >
       <div className={componentCardStyles.inner}>
-        {status && <p className={componentCardStyles.status}>{status}</p>}
         <div className={componentCardStyles.header}>
           {logoUrl && (
             <Image
@@ -49,8 +34,7 @@ export default function ContentCard({
             <Image
               loading="lazy"
               src="/images/bookmark-light.svg"
-              alt=""
-              className={styles.bookmark}
+              alt="Bookmark"
               width={24}
               height={24}
             />
